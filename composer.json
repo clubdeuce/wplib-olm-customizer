@@ -1,0 +1,32 @@
+{
+  "name": "clubdeuce/wplib-olm-customizer",
+  "type": "library",
+  "description": "Customizer component for WPLib.",
+  "keywords": [ "wordpress", "php", "library", "wplib", "modules", "customizer" ],
+  "homepage": "http://github.com/clubdeuce/wplib-olm-customizer",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Daryl Lozupone",
+      "email": "daryl@newclarity.net",
+      "role" :  "DevOp and Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.6.2",
+    "mockery/mockery": "0.9.5",
+    "wplib/wplib": "0.13.2"
+  },
+  "autoload": {
+    "psr-0": { "Clubdeuce\\WPLib\\Components\\": "includes/" }
+  },
+  "support": {
+    "issues": "https://github.com/clubdeuce/wplib-olm-customizer/issues",
+    "forum": "https://wplib.slack.com/",
+    "source":"https://github.com/clubdeuce/wplib-olm-customizer",
+    "docs": "https://github.com/clubdeuce/wplib-olm-customizer/wiki"
+  }
+}
