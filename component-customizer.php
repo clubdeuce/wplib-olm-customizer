@@ -1,12 +1,15 @@
 <?php
 
 namespace Clubdeuce\WPLib\Components;
+use Clubdeuce\WPLib\Components\Customizer\Settings;
 
 /**
  * Class Customizer
  * @package Clubdeuce\WPLib\Components
  */
 class Customizer extends \WPLib_Module_Base {
+
+    const INSTANCE_CLASS = '\Clubdeuce\WPLib\Components\Customizer\Settings';
 
     /**
      * @var array
@@ -57,11 +60,30 @@ class Customizer extends \WPLib_Module_Base {
 
     /**
      * @param string $id
-     * @param array  $control
+     * @param array  $args
      */
-    static function register_control( $id, $control = array() ) {
+    static function register_control( $id, $args = array() ) {
 
-        static::$_controls[ $id ] = $control;
+        $key = $id;
+
+        /**
+         * Add support for passing a WP_Customize_Control object as the ID
+         */
+        if ( is_a( $id, '\WP_Customize_Control' ) ) {
+            $key  = md5( serialize( $id ) );
+            $args = $id;
+        }
+
+        static::$_controls[ $key ] = $args;
+
+    }
+
+    /**
+     * @return array
+     */
+    static function settings() {
+
+        return self::$_settings;
 
     }
 
@@ -133,21 +155,26 @@ class Customizer extends \WPLib_Module_Base {
     }
 
     /**
-     * @param array                 $control
-     * @param string                $id
-     * @param \WP_Customize_Manager $wp_customize
+     * @param array                        $control
+     * @param string|\WP_Customize_Control $id
+     * @param \WP_Customize_Manager        $wp_customize
      * @link  https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
      */
     protected static function _add_control( $control = array(), $id, $wp_customize ) {
 
-        $control = wp_parse_args( $control, array(
-            'label' => sprintf( __( 'Please specify a label for this control: %1$s', 'customizer' ), $id ),
-            'description' => '',
-            'section'     => null,
-            'priority'    => 100,
-            'type'        => 'text',
-            'settings'    => null,
-        ) );
+        if ( is_a( $control, '\WP_Customize_Control' ) ) {
+            $id = $control;
+            $control = null;
+        } else {
+            $control = wp_parse_args( $control, array(
+                'label' => sprintf( __( 'Please specify a label for this control: %1$s', 'customizer' ), $id ),
+                'description' => '',
+                'section'     => null,
+                'priority'    => 100,
+                'type'        => 'text',
+                'settings'    => null,
+            ) );
+        }
 
         $wp_customize->add_control( $id, $control );
     }
