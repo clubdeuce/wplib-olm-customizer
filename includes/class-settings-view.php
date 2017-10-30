@@ -3,10 +3,9 @@
 namespace Clubdeuce\WPLib\Components\Customizer;
 
 /**
- * Class Settings
+ * Class Settings_View
  * @package Clubdeuce\WPLib\Components\Customizer
  */
-class Settings extends \WPLib_Item_Base {
-
+class Settings_View extends \WPLib_View_Base {
 
 }

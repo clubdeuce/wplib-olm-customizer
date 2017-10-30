@@ -12,4 +12,4 @@ Simply add the following line to the `require` section of your project's
  
 where `x.x.x` is the version number you wish to use.
 
-The library will be autoloaded.
+You will then need to include the `component-customizer.php` file.

@@ -1,7 +1,6 @@
 <?php
 
 namespace Clubdeuce\WPLib\Components;
-use Clubdeuce\WPLib\Components\Customizer\Settings;
 
 /**
  * Class Customizer
